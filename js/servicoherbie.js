@@ -34,7 +34,7 @@ if(localStorage.getItem('servicoHer')) {
 
 
 Pendencias()
-
+mostrarPendencias()
 
 inServico.value = ""
 inServico.focus()
@@ -96,7 +96,39 @@ function ExecutarServico() {
     localStorage.setItem('servicoHer',servicos.join(';'))
 
     Pendencias()
+    
 
 }
 var btExec = document.getElementById('btExecutar')
 btExec.addEventListener('click', ExecutarServico)
+
+var Btenter = document.getElementById('inServico')
+Btenter.addEventListener('keypress', function(tecla) {
+    if(tecla.key === "Enter") {
+        AdicionarServico()
+    }
+})
+
+function mostrarPendencias() {
+    var sele = document.getElementById("outPen")
+    if(localStorage.getItem("servicoHer")) { 
+        
+        var servico = localStorage.getItem("servicoHer").split(";")
+
+
+        var opcoes = ""
+
+        for(var i = 0; i < servico.length;i++) {
+            opcoes += servico[i] + "\n"
+        }
+       
+      sele.textContent = opcoes.substr(0, opcoes.length -1)
+        
+    }
+    
+}
+mostrarPendencias()
+
+
+
+
